@@ -13,7 +13,21 @@
         <tr th:each="note: ${notes}">
             <td th:text="${note.title}"></td>
             <td th:text="${note.content}"></td>
+            <th>
+                <a th:href="@{'/note/edit?id='+${note.id}}">
+                    <button type="button">Edit</button>
+                </a>
+            </th>
+            <th>
+                <form th:action="@{'/note/delete?id='+${note.id}}" method="post">
+                    <button type="submit">Delete</button>
+                </form>
+            </th>
         </tr>
 </table>
+
+<a th:href="@{'/note/add'}">
+    <button type="button">Add new note</button>
+</a>
 </body>
 </html>

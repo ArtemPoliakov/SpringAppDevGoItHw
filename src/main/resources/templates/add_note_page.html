@@ -5,52 +5,17 @@
     <title>Title</title>
 </head>
 <body>
-    <form id="addForm" onsubmit="submitForm(event)">
+    <form th:action="@{/note/add}" method="post">
         <div>
             <label for="title">Title</label>
-            <input type="text" name="title" id="title" placeholder="Title of your note">
+            <input type="text" name="title" id="title" placeholder="Title of your note" required>
         </div>
         <div>
             <label for="content">Content</label>
-            <input type="text" name="content" id="content" placeholder="Content of your note">
+            <input type="text" name="content" id="content" placeholder="Content of your note" required>
         </div>
         <button type="submit">Submit</button>
         <button type="reset">Reset</button>
     </form>
-
-    <script>
-         function submitForm(event) {
-            event.preventDefault();
-
-            const form = document.getElementById('addForm');
-            const formData = new FormData(form);
-            const jsonData = {};
-            formData.forEach((value, key) => {
-                jsonData[key] = value;
-            });
-            const jsonString = JSON.stringify(jsonData);
-            const url = 'http://localhost:8080/note/add';
-
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: jsonString,
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Success:', data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }
-    </script>
 </body>
 </html>

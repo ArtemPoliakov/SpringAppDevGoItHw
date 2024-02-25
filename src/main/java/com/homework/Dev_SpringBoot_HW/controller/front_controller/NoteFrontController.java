@@ -3,7 +3,7 @@ package com.homework.Dev_SpringBoot_HW.controller.front_controller;
 import com.homework.Dev_SpringBoot_HW.controller.dto.NoteDto;
 import com.homework.Dev_SpringBoot_HW.controller.mapper.NoteMapper;
 import com.homework.Dev_SpringBoot_HW.controller.request_entities.NoteAddRequest;
-import com.homework.Dev_SpringBoot_HW.crud_services.NoteCrudService;
+import com.homework.Dev_SpringBoot_HW.service.NoteCrudService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.UUID;
 
@@ -55,8 +54,10 @@ public class NoteFrontController {
 
     @PostMapping(EDIT_URL)
     public String updateNoteById(
-            @RequestBody @Valid NoteDto noteDto)
+            @Valid @ModelAttribute("editNote") NoteAddRequest noteAddRequest,
+            @RequestParam("id") @NotNull UUID id)
     {
+        NoteDto noteDto = new NoteDto(id, noteAddRequest.getTitle(), noteAddRequest.getContent());
         noteCrudService.update(noteMapper.mapDtoToEntity(noteDto));
         return REDIRECT_TO_PRIMARY;
     }
@@ -70,7 +71,7 @@ public class NoteFrontController {
 
     @PostMapping(ADD_URL)
     public String addNote(
-            @RequestBody @Valid NoteAddRequest noteAddRequest)
+           @Valid @ModelAttribute("addNote") NoteAddRequest noteAddRequest)
     {
         NoteDto noteDto = noteMapper.mapNoteAddRequestToDto(noteAddRequest);
         noteCrudService.add(noteMapper.mapDtoToEntity(noteDto));

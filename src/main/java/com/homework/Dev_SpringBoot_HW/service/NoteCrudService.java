@@ -1,4 +1,4 @@
-package com.homework.Dev_SpringBoot_HW.crud_services;
+package com.homework.Dev_SpringBoot_HW.service;
 
 import com.homework.Dev_SpringBoot_HW.data.TempDb;
 import com.homework.Dev_SpringBoot_HW.data.entities.NoteEntity;
