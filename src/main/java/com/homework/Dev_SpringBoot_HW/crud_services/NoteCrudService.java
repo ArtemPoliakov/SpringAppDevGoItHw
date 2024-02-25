@@ -1,22 +1,21 @@
 package com.homework.Dev_SpringBoot_HW.crud_services;
 
-import com.homework.Dev_SpringBoot_HW.TempDb;
-import com.homework.Dev_SpringBoot_HW.entities.Note;
+import com.homework.Dev_SpringBoot_HW.data.TempDb;
+import com.homework.Dev_SpringBoot_HW.data.entities.NoteEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class NoteCrudService {
-    HashMap<UUID, Note> dataMap = TempDb.getInstance().getDataMap();
-    public List<Note> listAll(){
-        return dataMap.values().stream().collect(Collectors.toList());
+    HashMap<UUID, NoteEntity> dataMap = TempDb.getInstance().getDataMap();
+    public List<NoteEntity> listAll(){
+        return dataMap.values().stream().toList();
     }
-    public Note add(Note note){
+    public NoteEntity add(NoteEntity note){
         note.setId(UUID.randomUUID());
         dataMap.put(note.getId(), note);
         return note;
@@ -28,7 +27,7 @@ public class NoteCrudService {
             throw new NoSuchElementException();
         }
     }
-    public void update(Note note){
+    public void update(NoteEntity note){
         if(dataMap.containsKey(note.getId())){
             dataMap.get(note.getId()).setTitle(note.getTitle());
             dataMap.get(note.getId()).setContent(note.getContent());
@@ -36,7 +35,7 @@ public class NoteCrudService {
             throw new NoSuchElementException();
         }
     }
-    public Note getById(UUID id){
+    public NoteEntity getById(UUID id){
         if(dataMap.containsKey(id)){
             return dataMap.get(id);
         } else{
