@@ -3,31 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/primary_page_styles.css">
 </head>
 <body>
-<table>
+    <table class="table-props">
         <tr>
-            <th>Title</th>
-            <th>Content</th>
+            <th class="headline-props">Title</th>
+            <th class="headline-props">Content</th>
         </tr>
         <tr th:each="note: ${notes}">
-            <td th:text="${note.title}"></td>
-            <td th:text="${note.content}"></td>
-            <th>
-                <a th:href="@{'/note/edit?id='+${note.id}}">
-                    <button type="button">Edit</button>
-                </a>
-            </th>
-            <th>
-                <form th:action="@{'/note/delete?id='+${note.id}}" method="post">
-                    <button type="submit">Delete</button>
-                </form>
-            </th>
-        </tr>
-</table>
+            <td class="regular-column-props" th:text="${note.title}"></td>
+            <td class="regular-column-props" th:text="${note.content}"></td>
+            <td>
+                <div class="container">
+                    <a th:href="@{'/note/edit?id='+${note.id}}">
+                        <button type="button" class="button">Edit</button>
+                    </a>
+                    <form th:action="@{'/note/delete?id='+${note.id}}" method="post">
+                        <button type="submit" class="button">Delete</button>
+                    </form>
+                </div>
 
-<a th:href="@{'/note/add'}">
-    <button type="button">Add new note</button>
-</a>
+            </td>
+        </tr>
+        <tr>
+            <td class="regular-column-props">
+                <a th:href="@{'/note/add'}">
+                    <button type="button" class="button">Add new note</button>
+                </a>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>

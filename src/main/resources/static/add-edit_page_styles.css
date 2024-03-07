@@ -1,0 +1,32 @@
+.global_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+}
+
+.label_style{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.input_style{
+    flex: 1;
+    padding: 10px;
+    box-sizing: border-box;
+    max-width: 300px;
+}
+
+.button {
+    background-color: #EC5800;
+    color: #FFFFFF;
+    transition: transform 0.3s ease-in-out;
+    border-radius: 5px;
+    margin: 8px;
+    padding: 10px 20px;
+    flex: 0 0 calc(33.33% - 10px);
+}
+
+.button:hover {
+    transform: scale(1.1);
+}
