@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>TheSuperNoteWebApp/add</title>
     <link rel="stylesheet" type="text/css" href="/add-edit_page_styles.css">
 </head>
 <body>
@@ -14,7 +14,7 @@
                     <label class="label_style" for="title">Title</label>
                 </td>
                 <td>
-                    <input class="input_style" type="text" name="title" id="title" placeholder="Title of your note" required>
+                    <input class="input_style" type="text" name="title" id="title" placeholder="Title of your note" required minlength="3" maxlength="225">
                 </td>
             </tr>
             <tr>
@@ -22,7 +22,7 @@
                    <label class="label_style" for="content">Content</label>
                </td>
                <td>
-                   <input class="input_style" type="text" name="content" id="content" placeholder="Content of your note" required>
+                   <input class="input_style" type="text" name="content" id="content" placeholder="Content of your note" required minlength="3" maxlength="555">
                </td>
             </tr>
         </table>

@@ -3,7 +3,7 @@ package com.homework.Dev_SpringBoot_HW.controller.front_controller;
 import com.homework.Dev_SpringBoot_HW.controller.dto.NoteDto;
 import com.homework.Dev_SpringBoot_HW.controller.mapper.NoteMapper;
 import com.homework.Dev_SpringBoot_HW.controller.request_entities.NoteAddRequest;
-import com.homework.Dev_SpringBoot_HW.service.NoteCrudService;
+import com.homework.Dev_SpringBoot_HW.service.NoteService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -29,14 +29,14 @@ public class NoteFrontController {
     private static final String ADD_TEMPLATE_NAME = "add_note_page";
     private static final String REDIRECT_TO_PRIMARY = "redirect:/note/list";
 
-    private final NoteCrudService noteCrudService;
+    private final NoteService noteService;
     private final NoteMapper noteMapper;
 
     @GetMapping(LIST_URL)
     public ModelAndView listAllNotes(){
         ModelAndView modelAndView = new ModelAndView(PRIMARY_TEMPLATE_NAME);
         modelAndView.addObject("notes",
-                noteMapper.mapAllNoteEntitiesToDto(noteCrudService.listAll()));
+                noteMapper.mapAllNoteEntitiesToDto(noteService.listAll()));
         modelAndView.setStatus(HttpStatus.OK);
         return modelAndView;
     }
@@ -47,7 +47,7 @@ public class NoteFrontController {
     {
         ModelAndView modelAndView = new ModelAndView(EDIT_TEMPLATE_NAME);
         modelAndView.addObject("note",
-                noteMapper.mapEntityToDto(noteCrudService.getById(id)));
+                noteMapper.mapEntityToDto(noteService.getById(id)));
         modelAndView.setStatus(HttpStatus.OK);
         return modelAndView;
     }
@@ -58,7 +58,7 @@ public class NoteFrontController {
             @RequestParam("id") @NotNull UUID id)
     {
         NoteDto noteDto = new NoteDto(id, noteAddRequest.getTitle(), noteAddRequest.getContent());
-        noteCrudService.update(noteMapper.mapDtoToEntity(noteDto));
+        noteService.update(noteMapper.mapDtoToEntity(noteDto));
         return REDIRECT_TO_PRIMARY;
     }
 
@@ -74,13 +74,23 @@ public class NoteFrontController {
            @Valid @ModelAttribute("addNote") NoteAddRequest noteAddRequest)
     {
         NoteDto noteDto = noteMapper.mapNoteAddRequestToDto(noteAddRequest);
-        noteCrudService.add(noteMapper.mapDtoToEntity(noteDto));
+        noteService.add(noteMapper.mapDtoToEntity(noteDto));
         return REDIRECT_TO_PRIMARY;
     }
 
     @PostMapping(DELETE_URL)
     public String deleteNote(@RequestParam("id") @NotNull UUID id){
-        noteCrudService.deleteById(id);
+        noteService.deleteById(id);
         return REDIRECT_TO_PRIMARY;
+    }
+
+    //TEST
+    @GetMapping("/specTestLessThan")
+    public ModelAndView specTestLessThan(@RequestParam(name="mtl") int mtl, @RequestParam(name="mcl") int mcl){
+        ModelAndView modelAndView = new ModelAndView(PRIMARY_TEMPLATE_NAME);
+        modelAndView.addObject("notes",
+                noteMapper.mapAllNoteEntitiesToDto(noteService.findAllWithLengthLessThan(mtl, mcl)));
+        modelAndView.setStatus(HttpStatus.OK);
+        return modelAndView;
     }
 }

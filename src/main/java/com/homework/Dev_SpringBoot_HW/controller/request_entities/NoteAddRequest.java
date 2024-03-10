@@ -8,7 +8,7 @@ import lombok.Data;
 
 public class NoteAddRequest {
     @NotNull
-    @Size(min = 3, max = 255)
+    @Size(min = 3, max = 225)
     private String title;
     @NotNull
     @Size(min = 3, max = 555)
