@@ -10,6 +10,6 @@ import java.util.UUID;
 
 public interface NoteRepository extends JpaRepository<NoteEntity, UUID>, JpaSpecificationExecutor<NoteEntity> {
     @Query(nativeQuery = true, value =
-            "SELECT (id, title, content, user_id) FROM notes WHERE user_id = :username")
+            "SELECT id, title, content, user_id FROM notes WHERE user_id = :username")
     List<NoteEntity> findAllByUserId(@Param("username") String userId);
 }
