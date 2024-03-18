@@ -21,35 +21,35 @@ import java.util.List;
 @RequestMapping("/rest")
 @RequiredArgsConstructor
 public class RestControllerTest {
-    private static final String REDIRECT_TO_PRIMARY = "redirect:/rest/list";
-    private static final String ADD_URL = "/add";
-    private static final String LIST_URL = "/list";
+//    private static final String REDIRECT_TO_PRIMARY = "redirect:/rest/list";
+//    private static final String ADD_URL = "/add";
+//    private static final String LIST_URL = "/list";
+//
+//    private final NoteService noteService;
+//    private final NoteMapper noteMapper;
 
-    private final NoteService noteService;
-    private final NoteMapper noteMapper;
-
-    @GetMapping(LIST_URL)
-    public ResponseEntity<List<NoteDto>> listAllNotes(HttpServletResponse servletResponse){
-        List<NoteDto> noteEntities = noteMapper.mapAllNoteEntitiesToDto(noteService.listAll());
-        ResponseEntity<List<NoteDto>> response =
-                new ResponseEntity<>(noteEntities, HttpStatus.OK);
-        Cookie cookie = new Cookie("HelloCookie","HelloFromArtem!");
-        servletResponse.addCookie(cookie);
-        return response;
-    }
-
-    @PostMapping(ADD_URL)
-    public String addNote(
-            @Valid @RequestBody NoteAddRequest noteAddRequest, HttpServletRequest req)
-    {
-        Cookie cookie1 = Arrays.stream(req.getCookies())
-                .filter(cookie -> cookie.getName().equals("HelloCookie"))
-                .findAny()
-                .get();
-        System.out.println(cookie1);
-
-        NoteDto noteDto = noteMapper.mapNoteAddRequestToDto(noteAddRequest);
-        noteService.add(noteMapper.mapDtoToEntity(noteDto));
-        return REDIRECT_TO_PRIMARY;
-    }
+//    @GetMapping(LIST_URL)
+//    public ResponseEntity<List<NoteDto>> listAllNotes(HttpServletResponse servletResponse){
+//        List<NoteDto> noteEntities = noteMapper.mapAllNoteEntitiesToDto(noteService.listAll());
+//        ResponseEntity<List<NoteDto>> response =
+//                new ResponseEntity<>(noteEntities, HttpStatus.OK);
+//        Cookie cookie = new Cookie("HelloCookie","HelloFromArtem!");
+//        servletResponse.addCookie(cookie);
+//        return response;
+//    }
+//
+//    @PostMapping(ADD_URL)
+//    public String addNote(
+//            @Valid @RequestBody NoteAddRequest noteAddRequest, HttpServletRequest req)
+//    {
+//        Cookie cookie1 = Arrays.stream(req.getCookies())
+//                .filter(cookie -> cookie.getName().equals("HelloCookie"))
+//                .findAny()
+//                .get();
+//        System.out.println(cookie1);
+//
+//        NoteDto noteDto = noteMapper.mapNoteAddRequestToDto(noteAddRequest);
+//        noteService.add(noteMapper.mapDtoToEntity(noteDto));
+//        return REDIRECT_TO_PRIMARY;
+//    }
 }

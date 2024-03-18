@@ -17,6 +17,9 @@ public class NoteService {
         return noteRepository.findAll();
     }
 
+    public List<NoteEntity> findAllForUser(String name){
+        return noteRepository.findAllByUserId(name);
+    }
     public NoteEntity add(NoteEntity note) {
         return noteRepository.save(note);
     }
@@ -32,7 +35,7 @@ public class NoteService {
     public NoteEntity getById(UUID id) {
         return noteRepository
                 .findById(id)
-                .orElseGet(() -> new NoteEntity(null, "UNDEFINED", "UNDEFINED"));
+                .orElseGet(() -> new NoteEntity(null, "UNDEFINED", "UNDEFINED", null));
     }
 
     //TEST

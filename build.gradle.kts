@@ -20,11 +20,13 @@ dependencies {
 	implementation ("org.springframework.boot:spring-boot-starter-data-jpa")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf
-	implementation("org.springframework.boot:spring-boot-starter-thymeleaf:3.2.2")
+	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
-	implementation("org.springframework.boot:spring-boot-starter-web:3.2.2")
+	implementation("org.springframework.boot:spring-boot-starter-web")
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+	implementation("org.springframework.boot:spring-boot-starter-security")
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
-	implementation("org.springframework.boot:spring-boot-starter-validation:3.2.2")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
 	// https://mvnrepository.com/artifact/org.projectlombok/lombok
 	compileOnly("org.projectlombok:lombok:1.18.30")
 	annotationProcessor("org.projectlombok:lombok:1.18.30")
